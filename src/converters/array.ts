@@ -5,7 +5,7 @@ export type TArray = {
     value: TAny[]
 };
 
-export const arrayConv = (value) => {
+export const arrayConv = (value: any[]) => {
     const arrayValue = value.map((arrayElement) => multiConverter(arrayElement));
     return {
         type: 'array',

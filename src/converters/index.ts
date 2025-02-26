@@ -18,7 +18,7 @@ const determinant = {
     object: objectConv,
     array: arrayConv,
     function: functionConv,
-}
+};
 
 export type TAny = TString | TNumber | TBigint | TBoolean | TSymbol | TUndefined | TArray | TObject | TFunction;
 
