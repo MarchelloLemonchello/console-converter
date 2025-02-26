@@ -1,7 +1,14 @@
-const path = require('path');
+import path from "node:path";
+import webpack from "webpack";
 
-module.exports = (env) => {
-  return {
+type Mode = "development" | "production";
+
+interface EnvVariables {
+  mode?: Mode;
+}
+
+export default (env: EnvVariables) => {
+  const config: webpack.Configuration = {
     mode: env.mode ?? "production",
     entry: path.resolve(__dirname, './src', 'index.ts'),
     output: {
@@ -22,4 +29,5 @@ module.exports = (env) => {
       extensions: ['.ts', '.js']
     }
   }
+  return config;
 }
