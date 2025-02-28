@@ -1,5 +1,5 @@
-import { converter } from "./converters";
-
 export {
-  converter
-}
+  converter,
+} from "./converters"
+
+export type * from './types'
