@@ -1,12 +1,15 @@
-import {multiConverter, TAny} from "./index";
+import {TAny, TTypeConverter} from "../types";
 
 export type TArray = {
     type: "array";
     value: TAny[]
 };
 
-export const arrayConv = (value: any[]) => {
-    const arrayValue = value.map((arrayElement) => multiConverter(arrayElement));
+export const arrayConverter: TTypeConverter = (value, converterFunction) => {
+    if (!Array.isArray(value)) {
+        throw new Error()
+    }
+    const arrayValue: TAny[] = value.map((arrayElement) => converterFunction(arrayElement));
     return {
         type: 'array',
         value: arrayValue

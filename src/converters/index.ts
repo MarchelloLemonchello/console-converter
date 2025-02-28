@@ -1,30 +1,38 @@
-import {numberConv, TNumber} from "./number";
-import {stringConv, TString} from "./string";
-import {objectConv, TObject} from "./object"
-import {arrayConv, TArray} from "./array";
-import {functionConv, TFunction} from "./function";
-import {bigintConv, TBigint} from "./bigint";
-import {booleanConv, TBoolean} from "./boolean";
-import {symbolConv, TSymbol} from "./symbol";
-import {TUndefined, undefinedConv} from "./undefined";
+import {numberConverter} from "./number";
+import {stringConverter} from "./string";
+import {objectConverter} from "./object"
+import {arrayConverter} from "./array";
+import {functionConverter} from "./function";
+import {bigintConverter} from "./bigint";
+import {booleanConverter} from "./boolean";
+import {symbolConverter} from "./symbol";
+import {undefinedConverter} from "./undefined";
+import {nullConverter} from "./null";
+
+import {TAny} from "../types";
+import {MapConverter} from "./map";
 
 const determinant = {
-    string: stringConv,
-    number: numberConv,
-    bigint: bigintConv,
-    boolean: booleanConv,
-    symbol: symbolConv,
-    undefined: undefinedConv,
-    object: objectConv,
-    array: arrayConv,
-    function: functionConv,
+    string: stringConverter,
+    number: numberConverter,
+    bigint: bigintConverter,
+    boolean: booleanConverter,
+    symbol: symbolConverter,
+    undefined: undefinedConverter,
+    object: objectConverter,
+    array: arrayConverter,
+    function: functionConverter,
+    null: nullConverter,
+    map: MapConverter
 };
 
-export type TAny = TString | TNumber | TBigint | TBoolean | TSymbol | TUndefined | TArray | TObject | TFunction;
-
-export function multiConverter(value: any) {
+export function converter(value: any) {
     let type: TAny['type'] = typeof value;
-    if (type === 'object' && Array.isArray(value)) type = 'array';
+    if (type === 'object') {
+        if (Array.isArray(value)) type = 'array';
+        if (value === null ) type = 'null'
+        if (value instanceof Map) type = 'map';
+    }
 
-    return determinant[type](value)
+    return determinant[type](value, converter)
 }

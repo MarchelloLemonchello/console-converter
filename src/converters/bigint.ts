@@ -1,11 +1,16 @@
+import {TTypeConverter} from "../types";
+
 export type TBigint = {
   type: 'bigint',
-  value: bigint
+  value: string
 };
 
-export const bigintConv = (value: bigint) => {
+export const bigintConverter: TTypeConverter = (value) => {
+  if (typeof value !== 'bigint'){
+    throw new Error()
+  }
   return {
     type: 'bigint',
-    value: value
+    value: String(value)
   } as TBigint;
 }

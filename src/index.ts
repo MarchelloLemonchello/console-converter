@@ -1,5 +1,5 @@
-import { multiConverter } from "./converters";
+import { converter } from "./converters";
 
 export {
-  multiConverter
+  converter
 }

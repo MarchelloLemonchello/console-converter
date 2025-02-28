@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "module": "ESNext",
     "declaration": true,
-    "declarationDir": "dist/esm/types",
+    "declarationDir": "dist/types",
     "sourceMap": false,
     "outDir": "dist",
     "moduleResolution": "node",

@@ -1,10 +1,15 @@
+import {TTypeConverter} from "../types";
+
 export type TSymbol = {
   type: 'symbol',
-  value: symbol
+  value: string
 };
-export const symbolConv = (value: symbol) => {
+export const symbolConverter: TTypeConverter = (value) => {
+  if (typeof value !== 'symbol'){
+    throw new Error()
+  }
   return {
     type: 'symbol',
-    value: value
+    value: String(value)
   } as TSymbol;
 }
